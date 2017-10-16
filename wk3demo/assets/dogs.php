@@ -14,7 +14,10 @@ function getDogsAsTable($db) { // function for printing out the table of dogs
         if($sql->rowCount() > 0) {
             $table = "<table>" . PHP_EOL;// PHP_EOL just is "end of line" and makes a table
             foreach ($dogs as $dog) { // runs for as many rows in $dogs
-                $table .= "<tr><td>" . $dog['name'] . "</td><td>" . $dog['gender'] . "</td><td>" . $dog['fixed'] . "</td></tr>"; // outputs data to table
+                $table .= "<tr><td>" . $dog['name'] . "</td><td>" . $dog['gender'] . "</td><td>" . $dog['fixed'] . "</td>"; // outputs data to table
+                $table .= "<td><form method = 'post' action='#'><input type='hidden' name = 'id' value='". $dog['id'] . "'/><input type='submit' name = 'action' value = 'Edit'/></form></td>";
+                $table .= "<td><form method = 'post' action='#'><input type='hidden' name = 'id' value='". $dog['id'] . "'/><input type='submit' name = 'action' value = 'Delete'/></form></td>";
+                $table .= "</tr>";
             }
             $table .= "</table>" . PHP_EOL; // closes table
         } else {
