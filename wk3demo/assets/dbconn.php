@@ -5,7 +5,7 @@
  * Date: 10/16/2017
  * Time: 8:44 AM
  */
-function dbConn()
+function dbConn() // sets up credentials for database and pits them in variable "$db"
 {
     $dsn = "mysql:host=localhost;dbname=dogs";
     $username = "dogs";

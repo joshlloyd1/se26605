@@ -5,20 +5,37 @@
  * Date: 10/16/2017
  * Time: 8:55 AM
  */
-function getDogsAsTable($db) {
+function getDogsAsTable($db) { // function for printing out the table of dogs
     try {
-        $sql = "SELECT * FROM dogs";
-        $sql = $db->prepare($sql);
-        $sql->execute();
-        $dogs = $sql->fetchAll(PDO::FETCH_ASSOC);
-        $table = "<table>" . PHP_EOL;
-        foreach($dogs as $dog) {
-            $table .= "<tr><td>" . $dog['name'] . "</td><td>" . $dog['gender'] . "</td><td>" . $dog['fixed'] . "</td></tr>";
+        $sql = "SELECT * FROM dogs"; // SQL statement
+        $sql = $db->prepare($sql); // sends credentials to database to be accessed
+        $sql->execute(); // executes command
+        $dogs = $sql->fetchAll(PDO::FETCH_ASSOC); // gathers information and puts it in $dogs variable
+        if($sql->rowCount() > 0) {
+            $table = "<table>" . PHP_EOL;// PHP_EOL just is "end of line" and makes a table
+            foreach ($dogs as $dog) { // runs for as many rows in $dogs
+                $table .= "<tr><td>" . $dog['name'] . "</td><td>" . $dog['gender'] . "</td><td>" . $dog['fixed'] . "</td></tr>"; // outputs data to table
+            }
+            $table .= "</table>" . PHP_EOL; // closes table
+        } else {
+            $table = "Life is sad. There are no dogs." . PHP_EOL;
         }
-        $table .= "</table>" . PHP_EOL;
-        return $table;
-    } catch (PDOException $e) {
+        return $table; // sends table back to be outputted
+    } catch (PDOException $e) { // if there was a problem then outputs die line
         die("There was a problem getting the dogs");
+    }
+
+}
+function addDog($db, $name, $gender, $fixed) {
+    try {
+    $sql = $db->prepare("INSERT INTO dogs VALUES (null, :name, :gender, :fixed)");
+    $sql->bindParam('name', $name);
+    $sql->bindParam('gender', $gender);
+    $sql->bindParam('fixed', $fixed);
+    $sql->execute();
+    return $sql->rowCount();
+    } catch (PDOException $e) {
+        die("There was a problem adding the dog.");
     }
 
 }

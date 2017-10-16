@@ -5,7 +5,7 @@
  * Date: 10/16/2017
  * Time: 8:12 AM
  */?>
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- sets up header on each page (same on each page)-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
