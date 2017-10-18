@@ -6,10 +6,11 @@
  * Time: 9:37 AM
  */
 ?>
-Copyright &copy; <?php echo date('Y'); ?> Josh Lloyd. All rights reserved.
 </section> <!-- sets up footer of page (same on each page) -->
 <footer>
-    Copyright &copy; <?php echo date('Y'); ?> Josh Lloyd. All rights reserved.
+    <br>
+    <br>
+    Copyright &copy; <?php echo date('Y'); ?> Josh Lloyd. All rights reserved. <!-- footer information fount on all pages! -->
 </footer>
 </body>
 </html>
