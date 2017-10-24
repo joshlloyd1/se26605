@@ -10,11 +10,11 @@
 include_once './dbconnect.php';
 include_once './functions.php';
 
-$db = dbconnect();
+$db = dbconnect(); // UPDATE PAGE TO ALLOW USER TO UPDATE A ROW IN DB
 
 if ( isPostRequest() ) {
 
-    $id = filter_input(INPUT_POST, 'i-d');
+    $id = filter_input(INPUT_POST, 'i-d'); // GRABS INFORMATION
     $corp = filter_input(INPUT_POST, 'corp');
     $email = filter_input(INPUT_POST, 'email');
     $zipcode = filter_input(INPUT_POST, 'zipcode');
@@ -22,12 +22,12 @@ if ( isPostRequest() ) {
     $phone = filter_input(INPUT_POST, 'phone');
 
     $stmt = $db->prepare("UPDATE corps SET corp = :corp, email = :email, zipcode = :zipcode, owner = :owner, phone = :phone WHERE id = :id");
-
+ // SQL STATMENT ^^
     $binds = array(
         ":id" => $id,
         ":corp" => $corp,
         ":email" => $email,
-        ":zipcode" => $email,
+        ":zipcode" => $zipcode,
         ":owner" => $owner,
         ":phone" => $phone
     );
@@ -61,7 +61,7 @@ if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
 
 }
 
-
+// HTML FOR FORM TO UPDATE A ROW
 ?>
 
 <p>
@@ -81,7 +81,7 @@ if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
     <input type="submit" value="Submit" />
 </form>
 
-<a href="view.php"> Go back </a>
+<a href="view.php"> Go to Table </a>
 
 </body>
 </html>

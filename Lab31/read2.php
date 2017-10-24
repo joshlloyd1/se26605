@@ -3,43 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Read</title>
-
-
 </head>
 <body>
 <?php
+try {
+    $id = filter_input(INPUT_GET, 'id');
 
-include_once './dbconnect.php';
+    include_once './dbconnect.php';
 
-$db = dbconnect();
+    $db = dbconnect();
 
-$id = filter_input(INPUT_POST, 'id');
+    $stmt = $db->prepare("SELECT * FROM corps WHERE id = :id"); // GRABS  FROM DB
 
-$stmt = $db->prepare("SELECT * FROM corps where id = :id");
+    $binds = array(
+        ":id" => $id
+    );
 
-$results = array();
-if ($stmt->execute()) {
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $result = array();
+    if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    $result['incorp_dt'] = date("m/d/y");
+} catch(PDOException $e) {
+    die("there was a problem getting info for row");
 }
-
 ?>
-
-
-<table border="1">
-    <?php foreach ($results as $row): ?>
+<table>
+    <tbody>
         <tr>
-            <td><?php echo $row['id']; ?></td>
-            <td><?php echo $row['corp']; ?></td>
-            <td><?php echo $row['incorp_dt']; ?></td>
-            <td><?php echo $row['email']; ?></td>
-            <td><?php echo $row['zipcode']; ?></td>
-            <td><?php echo $row['owner']; ?></td>
-            <td><?php echo $row['phone']; ?></td>
-
+            <td><b>ID:</b> <?php echo $result['id']; ?></td>
+            <td><b>Corporation:</b> <?php echo $result['corp']; ?></td>
+            <td><b>Inc.</b> <?php echo $result['incorp_dt']; ?></td>
+            <td><b>Email:</b> <?php echo $result['email']; ?></td>
+            <td><b>Zip Code:</b><?php echo $result['zipcode']; ?></td>
+            <td><b>Owner:</b> <?php echo $result['owner']; ?></td>
+            <td><b>Phone number:</b> <?php echo $result['phone']; ?></td>
+            <td><a href="delete.php?id=<?php echo $result['id']; ?>">Delete</a></td>
+            <td><a href="update.php?id=<?php echo $result['id']; ?>">Update</a></td>
         </tr>
-    <?php endforeach; ?>
+    </tbody>
 </table>
-
-
+<a href="view.php"> Go to Table </a>
 </body>
 </html>

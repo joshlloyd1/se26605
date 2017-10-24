@@ -7,13 +7,13 @@
 <body>
 <?php
 
-include_once './dbconnect.php';
+include_once './dbconnect.php'; // DELETE PAGE
 
-$id = filter_input(INPUT_GET, 'id');
+$id = filter_input(INPUT_GET, 'id'); // GRABS ID
 
 $db = dbconnect();
 
-$stmt = $db->prepare("DELETE FROM corps where id = :id");
+$stmt = $db->prepare("DELETE FROM corps where id = :id"); // DELETES USING QUERY
 
 $binds = array(
     ":id" => $id
@@ -31,7 +31,7 @@ if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
     Deleted
 </h1>
 
-<a href="<?php echo filter_input(INPUT_SERVER, 'HTTP_REFERER'); ?>"> Go back </a>
+<a href="view.php"> Go to Table </a>
 
 </body>
 </html>

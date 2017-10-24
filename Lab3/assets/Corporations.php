@@ -69,7 +69,7 @@ function getCorp($db, $id) {
 }
 
 function readCorp($db, $id) {
-    $sql = "SELECT * FROM corps WHERE id = $id";
+    $sql = "SELECT * FROM corps WHERE id = :id";
     $sql = $db->prepare($sql);
     $sql->execute();
     $corps = $sql->fetchAll(PDO::FETCH_ASSOC);
