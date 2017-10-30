@@ -8,8 +8,8 @@
 
 function getDB() {
     $dsn = "mysql:host=localhost;dbname=wk4demo";
-    $username = "wk4demo";
-    $pwd = "se266";
+    $username = "root";
+    $pwd = "";
     try {
         $db = new PDO($dsn, $username, $pwd);
         $db->setAttribute(PDO::ERRMODE_EXCEPTION, PDO::ERRMODE_EXCEPTION);
@@ -39,5 +39,6 @@ function getColumnNames($db, $tbl){
     } catch (Exception $e){
             die("There was a problem retrieving the column names");
     }
+
     return $column_names;
 }

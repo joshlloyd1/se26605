@@ -6,6 +6,7 @@
  * Time: 5:10 PM
  */
 ?>
+<section><a href="?action=New">New</a> Employee</section>
 <footer>Copyright &copy; <?php echo date('Y'); ?>, Clark Alexander. All Rights Reserved</footer>
 </body>
 </html>
