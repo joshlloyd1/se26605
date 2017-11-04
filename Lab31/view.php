@@ -11,9 +11,10 @@
 <?php // VIEW PAGE TO SEE WHOLE DB
 
 include_once './dbconnect.php';
+$action = filter_input(INPUT_GET, $action, SANATIZE);
 
 $db = dbconnect();
-
+switch($action);
 $stmt = $db->prepare("SELECT * FROM corps"); // GRABS EVERYTHING FROM DB
 
 $results = array();
