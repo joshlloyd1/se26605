@@ -100,17 +100,7 @@ function CorpForm($col) // Function that allows user to sort data through form
         <input type='submit' name='action' value='Reset' />
     </form></section>";
 
-    /*
 
-
-     "<form method='get' action='view.php'>";
-        $form .= "<select name='col' id='col'>";
-        foreach ($col as $cols) {
-            $form .= "<option value='.$cols .' >" . $cols . "</option>";
-        }}
-        $form .= "</select>";
-
-        $form .= "</form>";*/
     return $form;
 }
 ?>
