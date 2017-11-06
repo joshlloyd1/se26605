@@ -24,14 +24,14 @@ $term = filter_input(INPUT_GET, 'term', FILTER_SANITIZE_STRING) ?? NULL;
 $db = dbconnect();
 
 switch($action) { // SWITCH statment for all buttons, and default
-    case 'sort':
-        $sortable = true;
-        $corps = getCorpsAsSortedTable($db, $col, $dir);
-        $cols = getColumnNames($db, 'corps');
-        $linecount = countLines($corps);
-        echo CorpForm($cols);
-        echo $linecount;
-        echo getCorpsAsTable($db, $corps, $cols, $sortable);
+    case 'sort': // when user clicks for sort
+        $sortable = true; // tells function that it will be sorted
+        $corps = getCorpsAsSortedTable($db, $col, $dir); // gets table 
+        $cols = getColumnNames($db, 'corps'); // gets column names
+        $linecount = countLines($corps); // counts line numbers
+        echo CorpForm($cols); // outputs corp form
+        echo $linecount; // outputs linecount
+        echo getCorpsAsTable($db, $corps, $cols, $sortable); // outputs the corp table
         break;
     case 'search':
         $sortable = true;
@@ -42,7 +42,7 @@ switch($action) { // SWITCH statment for all buttons, and default
         echo $linecount;
         echo getCorpsAsTable($db, $corps, $cols, $sortable);
         break;
-    case 'reset':
+    case 'reset': // sets everything to defaults
         $corps = getCorps($db);
         $cols = getColumnNames($db, 'corps');
         $linecount = countLines($corps);
